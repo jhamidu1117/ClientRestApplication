@@ -1,6 +1,8 @@
 from PyQt5 import QtWidgets, QtGui, QtMultimedia, QtCore, QtNetwork
 
 from ClientApp.DuplicateView import Ui_MainWindow
+from datetime import datetime
+import dateutil.parser
 
 import re
 import sys
@@ -38,7 +40,7 @@ class mywindow(QtWidgets.QMainWindow):
             self.req = QtNetwork.QNetworkRequest(QtCore.QUrl(self.rest_url))
             self.req.setRawHeader(QtCore.QByteArray(b"Authorization"),
                                   QtCore.QByteArray(b"Token b80f6a9d350fe27bcde23084d47efc304dfd55c4"))
-
+            # self.req.deleteLater()
             self.nam = QtNetwork.QNetworkAccessManager()
             self.nam.finished.connect(self.handle_response)
             self.nam.get(self.req)
@@ -60,11 +62,12 @@ class mywindow(QtWidgets.QMainWindow):
             print(data)
             i = 0
             for v in data:
-                trg = v['trg_id']
+                dateformat = dateutil.parser.parse(str(v['timestamp']))
+                datetime_str = datetime.strftime(dateformat, '%H:%M:%S %m/%d/%y')
                 self.ui.OutputTable.setRowCount(i + 1)
                 self.ui.OutputTable.setItem(i, 0, QtWidgets.QTableWidgetItem(str(v['trg_id'])))
-                self.ui.OutputTable.setItem(i, 1, QtWidgets.QTableWidgetItem(str(v['location'])))
-                self.ui.OutputTable.setItem(i, 2, QtWidgets.QTableWidgetItem(str(v['timestamp'])))
+                self.ui.OutputTable.setItem(i, 1, QtWidgets.QTableWidgetItem(datetime_str))
+                self.ui.OutputTable.setItem(i, 2, QtWidgets.QTableWidgetItem(str(v['location'])))
                 i += 1
             self.ui.TrgLineEdit.clear()
 

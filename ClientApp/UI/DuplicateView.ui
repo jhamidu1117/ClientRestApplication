@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>867</width>
-    <height>361</height>
+    <width>861</width>
+    <height>349</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>1</horstretch>
+    <verstretch>1</verstretch>
+   </sizepolicy>
   </property>
   <property name="font">
    <font>
@@ -22,6 +28,12 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>1</horstretch>
+     <verstretch>1</verstretch>
+    </sizepolicy>
+   </property>
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -31,9 +43,12 @@
       <height>281</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,0,2">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,1">
      <property name="spacing">
       <number>2</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetNoConstraint</enum>
      </property>
      <property name="leftMargin">
       <number>5</number>
@@ -53,7 +68,38 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QGraphicsView" name="graphicsView"/>
+        <widget class="QGraphicsView" name="graphicsView">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <horstretch>1</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+         <property name="backgroundBrush">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="foregroundBrush">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="LocationLabel">
@@ -73,6 +119,12 @@
        </item>
        <item>
         <widget class="QLineEdit" name="TrgLineEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -129,6 +181,12 @@
      </item>
      <item>
       <widget class="QTableWidget" name="OutputTable">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>1</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Nirmala UI</family>
@@ -176,18 +234,25 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>867</width>
-     <height>27</height>
+     <width>861</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFunctions">
     <property name="title">
      <string>Functions</string>
     </property>
+    <addaction name="actionOffline_Mode"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFunctions"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOffline_Mode">
+   <property name="text">
+    <string>Offline Mode</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
