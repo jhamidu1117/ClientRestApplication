@@ -53,6 +53,8 @@ class mywindow(QtWidgets.QMainWindow):
     def handle_response(self, reply):
 
         er = reply.error()
+        reply.deleteLater()
+        reply.downloadProgress.connect(self.addProgressbar)
 
         if er == QtNetwork.QNetworkReply.NoError:
 
@@ -61,6 +63,7 @@ class mywindow(QtWidgets.QMainWindow):
             data = json.loads(str(bytes_string, 'utf-8'))
             print(data)
             i = 0
+            progressBar = 0
             for v in data:
                 dateformat = dateutil.parser.parse(str(v['timestamp']))
                 datetime_str = datetime.strftime(dateformat, '%H:%M:%S %m/%d/%y')
@@ -69,12 +72,21 @@ class mywindow(QtWidgets.QMainWindow):
                 self.ui.OutputTable.setItem(i, 1, QtWidgets.QTableWidgetItem(datetime_str))
                 self.ui.OutputTable.setItem(i, 2, QtWidgets.QTableWidgetItem(str(v['location'])))
                 i += 1
+                progressBar += 25
+                self.ui.progressBar.setValue(progressBar)
+
             self.ui.TrgLineEdit.clear()
+            self.ui.progressBar.setValue(0)
 
         else:
             print("Error occured: ", er)
             print(reply.errorString())
             self.ui.TrgLineEdit.clear()
+
+    def addProgressbar(self, bytesReceived, bytesTotal):
+        while bytesReceived != bytesTotal:
+            progress = bytesReceived/bytesTotal
+            self.ui.progressBar.setValue(progress)
 
 
 app = QtWidgets.QApplication([])
