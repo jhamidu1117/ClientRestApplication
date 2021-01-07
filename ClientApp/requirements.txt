@@ -9,7 +9,7 @@ cryptography==2.8
 cx-Freeze==6.1
 future==0.18.2
 idna==2.8
-lxml==4.5.0
+lxml==4.6.2
 ntlm-auth==1.4.0
 numpy==1.18.1
 Office365-REST-Python-Client==2.1.5
